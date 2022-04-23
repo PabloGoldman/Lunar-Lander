@@ -55,10 +55,10 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Roll
-    descriptiveName: e
+    descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left alt
+    negativeButton: e
+    positiveButton: q
     altNegativeButton: 
     altPositiveButton: mouse 1
     gravity: 1000
