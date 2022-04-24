@@ -38,20 +38,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (rb.velocity.x > maxAcceleration.x)
-        {
-            rb.velocity = new Vector3(5,0,0);
-        }
-
-        if (rb.velocity.y > maxAcceleration.y)
-        {
-            rb.velocity = new Vector3(0, 5, 0);
-        }
-
-        if (rb.velocity.z > maxAcceleration.z)
-        {
-            rb.velocity = new Vector3(0, 0, 5);
-        }
+        
     }
 
     private void Movement()
