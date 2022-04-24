@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
 
+    Vector3 maxAcceleration = new Vector3(5, 5, 5);
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,27 +38,29 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        GetInput();
-    }
+        if (rb.velocity.x > maxAcceleration.x)
+        {
+            rb.velocity = new Vector3(5,0,0);
+        }
 
-    private void GetInput()
-    {
+        if (rb.velocity.y > maxAcceleration.y)
+        {
+            rb.velocity = new Vector3(0, 5, 0);
+        }
 
+        if (rb.velocity.z > maxAcceleration.z)
+        {
+            rb.velocity = new Vector3(0, 0, 5);
+        }
     }
 
     private void Movement()
     {
-        rb.AddRelativeForce(Vector3.up * verticalSpeed * Input.GetAxisRaw("Up")); //espacio
+        rb.AddRelativeForce(Vector3.up * verticalSpeed * Input.GetAxisRaw("Up"), ForceMode.Force); //espacio
 
-        rb.AddRelativeTorque(Vector3.right * rollSpeed * Input.GetAxisRaw("Vertical")); // W
+        rb.AddRelativeTorque(Vector3.right * rollSpeed * Input.GetAxisRaw("Vertical"), ForceMode.Force); // W
 
-        rb.AddRelativeTorque(Vector3.forward * rollSpeed * Input.GetAxisRaw("Roll")); // Q,E
-
-        if (rb.rotation.x < -90)
-        {
-            Vector3 aux = new Vector3(-90, rb.rotation.y, rb.rotation.z);
-            rb.rotation = Quaternion.Euler(aux);
-        }
+        rb.AddRelativeTorque(Vector3.forward * rollSpeed * Input.GetAxisRaw("Roll"), ForceMode.Force); // Q,E
     }
 
     public void ResetPlayerPos()
@@ -64,4 +68,13 @@ public class Player : MonoBehaviour
         transform.position = initialPos;
         transform.rotation = initialRot;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Platform")
+        {
+            Debug.Log("Ganaste");
+        }
+    }
+
 }
