@@ -5,20 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    //PREGUNTAR COMO COLISIONAR CON LOS HIJOS
+    //COMO HACER QUE SI SUPERA LOS 90 GRADOS EN Z, VUELVA A 90
+
     // Start is called before the first frame update
 
-    [SerializeField] float forwardSpeed = 25f;
     [SerializeField] float verticalSpeed = 5f;
 
-    [SerializeField] float rollSpeed = 5, rollAcceleration = 3.5f;
+    [SerializeField] float rollSpeed = 5;
 
     private Vector3 initialPos;
     private Vector3 initialVelocity;
     private Quaternion initialRot;
 
     Rigidbody rb;
-
-    Vector3 maxAcceleration = new Vector3(5, 5, 5);
 
     private void Awake()
     {
@@ -44,21 +44,6 @@ public class Player : MonoBehaviour
         {
             ResetPlayerPos();
         }
-
-        if (rb.velocity.x > maxAcceleration.x)
-        {
-            rb.velocity = new Vector3(5, 0, rb.velocity.z);
-        }
-
-        if (rb.velocity.y > maxAcceleration.y)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 5, rb.velocity.z);
-        }
-
-        if (rb.velocity.z > maxAcceleration.z)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0, 5);
-        }
     }
 
     private void Movement()
@@ -74,15 +59,18 @@ public class Player : MonoBehaviour
     {
         transform.position = initialPos;
         transform.rotation = initialRot;
-        rb.velocity= initialVelocity;
+        rb.velocity = initialVelocity;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Vector3 aux = new Vector3(0, 0, 0);
+        rb.velocity = aux;
+
         if (collision.gameObject.tag == "Platform")
         {
+            ResetPlayerPos();
             Debug.Log("Ganaste");
         }
     }
-
 }
