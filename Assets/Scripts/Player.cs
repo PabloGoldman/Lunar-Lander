@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] float rollSpeed = 5, rollAcceleration = 3.5f;
 
     private Vector3 initialPos;
+    private Vector3 initialVelocity;
     private Quaternion initialRot;
 
     Rigidbody rb;
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour
     {
         initialPos = transform.position;
         initialRot = transform.rotation;
+        initialVelocity = rb.velocity;
     }
 
     // Update is called once per frame
@@ -38,7 +40,25 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetPlayerPos();
+        }
+
+        if (rb.velocity.x > maxAcceleration.x)
+        {
+            rb.velocity = new Vector3(5, 0, rb.velocity.z);
+        }
+
+        if (rb.velocity.y > maxAcceleration.y)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 5, rb.velocity.z);
+        }
+
+        if (rb.velocity.z > maxAcceleration.z)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, 5);
+        }
     }
 
     private void Movement()
@@ -54,6 +74,7 @@ public class Player : MonoBehaviour
     {
         transform.position = initialPos;
         transform.rotation = initialRot;
+        rb.velocity= initialVelocity;
     }
 
     private void OnCollisionEnter(Collision collision)
