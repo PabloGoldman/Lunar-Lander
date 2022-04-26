@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] float rollSpeed = 5;
 
+    [SerializeField] LayerMask terrainLayer;
+
     private Vector3 initialPos;
     private Vector3 initialVelocity;
     private Quaternion initialRot;
@@ -48,6 +50,8 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 0.1f, Color.yellow);
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPlayerPos();
@@ -72,6 +76,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down) * 0.1f, terrainLayer))
+        {
+            Debug.Log("Perdiste");
+        }
+
         Vector3 aux = new Vector3(0, 0, 0);
         rb.velocity = aux;
         rb.Sleep();
