@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     //PREGUNTAR COMO COLISIONAR CON LOS HIJOS
     //COMO HACER QUE SI SUPERA LOS 90 GRADOS EN Z, VUELVA A 90
+    //Como frenar la aceleracion
 
     // Start is called before the first frame update
 
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
     private Quaternion initialRot;
 
     Rigidbody rb;
+
+    private int score = 0;
+    public int GetScore() => score;
 
     private void Awake()
     {
@@ -35,9 +39,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if (rb.IsSleeping())
+        {
+            rb.WakeUp();
+        }
+
         Movement();
     }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -66,10 +74,12 @@ public class Player : MonoBehaviour
     {
         Vector3 aux = new Vector3(0, 0, 0);
         rb.velocity = aux;
+        rb.Sleep();
 
         if (collision.gameObject.tag == "Platform")
         {
             ResetPlayerPos();
+            score++;
             Debug.Log("Ganaste");
         }
     }

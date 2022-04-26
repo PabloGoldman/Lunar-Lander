@@ -6,9 +6,15 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] Player player;
+
+    private void Start()
+    {
+
+    }
 
     void Update()
     {
-        scoreText.text = "Score: " + GameManager.Get().score;
+        scoreText.text = "Score: " + player.GetScore();
     }
 }
