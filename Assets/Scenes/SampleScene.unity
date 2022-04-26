@@ -271,9 +271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalSpeed: 15
   rollSpeed: 0.25
-  terrainLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!54 &525203079
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -301,8 +298,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.9610953, y: 12.014296, z: 7.9483705}
-  m_Center: {x: -0.32210767, y: 6.112813, z: 0.011835992}
+  m_Size: {x: 8.017395, y: 11.730331, z: 8.950249}
+  m_Center: {x: 0.029149055, y: 5.970833, z: 0.3052324}
 --- !u!4 &525203081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1911860528064810251, guid: b4ebfe3d8ab4def429989cd25349eb90, type: 3}

@@ -5,17 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    //PREGUNTAR COMO COLISIONAR CON LOS HIJOS
-    //COMO HACER QUE SI SUPERA LOS 90 GRADOS EN Z, VUELVA A 90
-    //Como frenar la aceleracion
-
     // Start is called before the first frame update
 
     [SerializeField] float verticalSpeed = 5f;
 
-    [SerializeField] float rollSpeed = 5;
 
-    [SerializeField] LayerMask terrainLayer;
+    [SerializeField] float rollSpeed = 5;
 
     private Vector3 initialPos;
     private Vector3 initialVelocity;
@@ -25,6 +20,8 @@ public class Player : MonoBehaviour
 
     private int score = 0;
     public int GetScore() => score;
+
+    private float angleTreshold = 45;
 
     private void Awake()
     {
@@ -50,12 +47,10 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 0.1f, Color.yellow);
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetPlayerPos();
-        }
+        }   
     }
 
     private void Movement()
@@ -76,11 +71,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down) * 0.1f, terrainLayer))
-        {
-            Debug.Log("Perdiste");
-        }
-
         Vector3 aux = new Vector3(0, 0, 0);
         rb.velocity = aux;
         rb.Sleep();
@@ -90,6 +80,11 @@ public class Player : MonoBehaviour
             ResetPlayerPos();
             score++;
             Debug.Log("Ganaste");
+        }
+
+        if (Vector3.Angle(transform.up, collision.collider.transform.up) >= angleTreshold)
+        {
+            Debug.Log("Perdiste");
         }
     }
 }
