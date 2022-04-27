@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private int score = 0;
     public int GetScore() => score;
 
-    private float angleTreshold = 45;
+    private float angleTreshold = 42;
 
     private void Awake()
     {
