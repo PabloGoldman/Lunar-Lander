@@ -77,9 +77,12 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Platform")
         {
-            ResetPlayerPos();
-            score++;
-            Debug.Log("Ganaste");
+            if (!collision.gameObject.GetComponent<Platform>().pressed)
+            {
+                ResetPlayerPos();
+                score++;
+                Debug.Log("Ganaste");
+            }
         }
 
         if (Vector3.Angle(transform.up, collision.collider.transform.up) >= angleTreshold)

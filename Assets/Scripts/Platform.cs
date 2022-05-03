@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    bool alreadyPressed = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool pressed = false;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -29,13 +18,13 @@ public class Platform : MonoBehaviour
         float t = 0;
         float maxTime = 0.5f;
 
-        while (t < maxTime && !alreadyPressed)
+        while (t < maxTime && !pressed)
         {
             t += Time.deltaTime;
             transform.position -= new Vector3(0, t * Time.deltaTime, 0);
 
             yield return null;
         }
-        alreadyPressed = true;
+        pressed = true;
     }
 }
