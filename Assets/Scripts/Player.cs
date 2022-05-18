@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
 
-    private int score = 0;
+    public int score = 0;
     public int GetScore() => score;
 
     private float angleTreshold = 42;
