@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 880492368}
   winPanel: {fileID: 838552223}
-  player: {fileID: 0}
+  player: {fileID: 1258350274}
 --- !u!114 &1094476448 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7301136511998163945, guid: 5853af0a4203ffa4f9aa4b613a53569d, type: 3}
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef305f05a7c5b542bc7e5229f4f6ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
+  dontDestroyOnLoad: 1
 --- !u!1 &2094250958
 GameObject:
   m_ObjectHideFlags: 0
